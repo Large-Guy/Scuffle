@@ -5,22 +5,9 @@ namespace Scuffle.Core;
 public abstract class BattleEntity
 {
     private List<IBattleAction> _effects = [];
-    private List<IBattleAction> _actions = [];
-    private IBattleAction? _controller;
+    public IBattleAction? Controller { get; protected set; }
 
     public IReadOnlyList<IBattleAction> Effects => _effects.ToList();
-    public IReadOnlyList<IBattleAction> Actions => _actions;
-    public IBattleAction? Controller => _controller;
-
-    protected void AddAction(IBattleAction action)
-    {
-        _actions.Add(action);
-    }
-    
-    protected void SetController(IBattleAction controller)
-    {
-        _controller = controller;
-    }
     
     public void AddEffect(IBattleAction effect)
     {
@@ -36,8 +23,8 @@ public abstract class BattleEntity
     
     public IEnumerator Run(BattleContext context)
     {
-        if (_controller == null)
+        if (Controller == null)
             yield break;
-        yield return _controller.Run(context, this);
+        yield return Controller.Run(context, this);
     }
 }

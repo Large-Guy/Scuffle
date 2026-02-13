@@ -68,11 +68,13 @@ public class BattleContext
     public void AddEntity(BattleEntity entity)
     {
         _entities.Add(entity);
+        _scheduler.AddEntity(entity);
     }
     
     public void RemoveEntity(BattleEntity entity)
     {
         _entities.Remove(entity);
+        _scheduler.RemoveEntity(entity);
     }
     
     public BattleEntity? Find(Func<BattleEntity, bool> predicate) => _entities.FirstOrDefault(predicate);
