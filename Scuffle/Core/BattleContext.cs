@@ -22,7 +22,7 @@ public class BattleContext
             return this;
         }
 
-        public BattleContext Build()
+        public BattleContext New()
         {
             if(_scheduler == null) throw new InvalidOperationException("Scheduler is required");
 
