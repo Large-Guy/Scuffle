@@ -6,7 +6,7 @@ public class CoroutineRunner : ICoroutineRunner
 {
     private readonly List<ICoroutine> _running = [];
     private readonly List<ICoroutine> _toAdd = [];
-    
+
     public void Start(ICoroutine coroutine)
     {
         _toAdd.Add(coroutine);

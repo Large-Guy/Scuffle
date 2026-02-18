@@ -12,7 +12,6 @@ public class Coroutine : ICoroutine
         _enumerator = enumerator;
     }
 
-
     public bool MoveNext()
     {
         if (_current != null)
