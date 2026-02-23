@@ -1,4 +1,5 @@
 using System.Collections;
+using Scuffle.Core.Events;
 
 namespace Scuffle.Core;
 
@@ -9,13 +10,18 @@ public abstract class BattleEntity
 
     public IReadOnlyList<IBattleAction> Effects => _effects.ToList();
     
-    public void AddEffect(IBattleAction effect)
+    public IEnumerator AddEffect(BattleContext context, IBattleAction effect)
     {
+        yield return context.Invoke(new AddEffectEvent(this, effect));
         _effects.Add(effect);
     }
 
-    public void RemoveEffect(IBattleAction effect)
+    public IEnumerator RemoveEffect(BattleContext context, IBattleAction effect)
     {
+        if(!_effects.Contains(effect))
+            yield break;
+        
+        yield return context.Invoke(new RemoveEffectEvent(this, effect));
         _effects.Remove(effect);
     }
     
