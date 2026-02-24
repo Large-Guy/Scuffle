@@ -78,8 +78,19 @@ public class BattleContext
     }
     
     public BattleEntity? Find(Func<BattleEntity, bool> predicate) => _entities.FirstOrDefault(predicate);
-    public IReadOnlyList<BattleEntity> FindAll(Func<BattleEntity?, bool> predicate) => _entities.Where(predicate).ToList();
-    
+
+    public List<BattleEntity> FindAll(Func<BattleEntity, bool> predicate)
+    {
+        List<BattleEntity> entities = [];
+        foreach (var entity in _entities)
+        {
+            if(predicate.Invoke(entity))
+                entities.Add(entity);
+        }
+
+        return entities;
+    }
+
     public IEnumerator Invoke(IBattleEvent @event)
     {
         foreach (var t in _rules)
