@@ -81,14 +81,7 @@ public class BattleContext
 
     public List<BattleEntity> FindAll(Func<BattleEntity, bool> predicate)
     {
-        List<BattleEntity> entities = [];
-        foreach (var entity in _entities)
-        {
-            if(predicate.Invoke(entity))
-                entities.Add(entity);
-        }
-
-        return entities;
+        return _entities.Where(entity => predicate.Invoke(entity)).ToList();
     }
 
     public IEnumerator Invoke(IBattleEvent @event)
