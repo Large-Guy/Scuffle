@@ -24,6 +24,11 @@ public abstract class BattleEntity
         yield return context.Invoke(new RemoveEffectEvent(this, effect));
         _effects.Remove(effect);
     }
+
+    public T? GetEffect<T>() where T : IBattleAction
+    {
+        return _effects.OfType<T>().FirstOrDefault();
+    }
     
     public bool HasEffect<T>() where T : IBattleAction => _effects.Any(e => e is T);
     
