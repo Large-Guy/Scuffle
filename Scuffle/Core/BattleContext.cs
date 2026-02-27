@@ -42,6 +42,8 @@ public class BattleContext
 
     public IBattleScheduler Scheduler => _scheduler;
     public IReadOnlyList<BattleEntity> Entities => _entities;
+
+    public bool Running => _isRunning;
     
     private BattleContext(IBattleScheduler scheduler)
     {
